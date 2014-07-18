@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:springData="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans      
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd        
+						http://www.springframework.org/schema/aop         
+						http://www.springframework.org/schema/aop/spring-aop-4.0.xsd     
+						http://www.springframework.org/schema/tx      
+						http://www.springframework.org/schema/tx/spring-tx-4.0.xsd        
+						http://www.springframework.org/schema/context      
+						http://www.springframework.org/schema/context/spring-context-4.0.xsd        
+						http://www.springframework.org/schema/jee      
+						http://www.springframework.org/schema/jee/spring-jee-4.0.xsd         
+						http://www.springframework.org/schema/lang     				
+						http://www.springframework.org/schema/lang/spring-lang-4.0.xsd     			
+						http://www.springframework.org/schema/security					      
+						http://www.springframework.org/schema/security/spring-security-4.0.xsd
+	    				http://www.springframework.org/schema/data/jpa
+    					http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+	">
+
+	<springData:repositories base-package="com.zohaib.research.repositories" />
+	
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="relationalDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+
+		<property name="driverClassName" value="${relationalDataSource.driverClassName}" />
+		<property name="url" value="${relationalDataSource.url}" />
+		<property name="username" value="${relationalDataSource.username}" />
+		<property name="password" value="${relationalDataSource.password}" />
+		<property name="maxIdle" value="${relationalDataSource.maxIdle}" />
+		<property name="maxActive" value="${relationalDataSource.maxActive}" />
+		<property name="maxWait" value="${relationalDataSource.maxWait}" />
+
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactoryBean" />
+	</bean>
+
+
+	<!-- Configure a JPA vendor adapter -->
+	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		id="hibernateJpaVendorAdapter">
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="false" />
+		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+	</bean>
+
+	<!-- EntityManager Factory that brings together the persistence unit, datasource 
+		and JPA Vendor -->
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="entityManagerFactoryBean">
+		<property name="dataSource" ref="relationalDataSource" />
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		
+	</bean>
+
+</beans>	 
