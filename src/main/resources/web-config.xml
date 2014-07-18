@@ -33,7 +33,7 @@
 	<!-- In order to allow mapping for /html -->
 	<mvc:default-servlet-handler />
 
-	<context:component-scan base-package="com.zohaib.research.web" />
+	<context:component-scan base-package="com.blobLumper.web" />
 	
 	
 	<bean id="messageSource"
@@ -80,6 +80,6 @@
         </property>
     </bean>  
     
-    <bean id="springBeanUtils" class="com.zohaib.research.spring.SpringBeanUtils" />
+    <bean id="springBeanUtils" class="com.blobLumper.spring.SpringBeanUtils" />
 
 </beans>						

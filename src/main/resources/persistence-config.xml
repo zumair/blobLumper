@@ -23,7 +23,7 @@
     					http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 	">
 
-	<springData:repositories base-package="com.zohaib.research.repositories" />
+	<springData:repositories base-package="com.blobLumper.repositories" />
 	
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
