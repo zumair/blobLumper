@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.zohaib.research</groupId>
-	<artifactId>blobBucket</artifactId>
+	<groupId>com.blobLumper</groupId>
+	<artifactId>blobLumper</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>Maven Webapp</name>
@@ -47,6 +47,7 @@
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<querydsl.version>2.3.2</querydsl.version>
 		<mysql.connector.version>5.1.30</mysql.connector.version>
+		<h2.database.version>1.4.180</h2.database.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		<hibernate-validator.version>5.1.1.Final</hibernate-validator.version>
 	</properties>
@@ -249,6 +250,7 @@
 			<artifactId>joda-time</artifactId>
 			<version>1.6.2</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.twitter4j</groupId>
 			<artifactId>twitter4j-core</artifactId>
@@ -259,11 +261,13 @@
 			<artifactId>twitter4j-stream</artifactId>
 			<version>3.0.3</version>
 		</dependency>
+		 -->
 		<dependency>
-			<groupId>storm</groupId>
-			<artifactId>storm</artifactId>
-			<version>0.8.1</version>
+			<groupId>org.apache.storm</groupId>
+			<artifactId>storm-core</artifactId>
+			<version>0.9.2-incubating</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -271,6 +275,13 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.database.version}</version>
+		</dependency>
+
 
 	</dependencies>
 

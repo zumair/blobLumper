@@ -1,4 +1,4 @@
-USE blobBucket;
+USE blobLumper;
 #----------------------
 #Application Properties
 #----------------------

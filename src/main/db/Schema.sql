@@ -1,6 +1,7 @@
-DROP DATABASE IF EXISTS blobBucket;
-CREATE DATABASE IF NOT EXISTS blobBucket;
-USE blobBucket;
+
+DROP DATABASE IF EXISTS blobLumper;
+CREATE DATABASE IF NOT EXISTS blobLumper;
+USE blobLumper;
 
 CREATE TABLE IF NOT EXISTS TempBucketDetails (
     id integer(25) NOT NULL AUTO_INCREMENT,

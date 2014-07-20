@@ -3,9 +3,9 @@ package com.blobLumper.spring;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+@Component
 public class SpringBeanUtils implements ApplicationContextAware{
 
 	private static ApplicationContext applicationContext;

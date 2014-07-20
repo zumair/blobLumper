@@ -26,8 +26,8 @@ public class TempEmptyBucketSpout extends BaseRichSpout{
 	
 	private static final long serialVersionUID = -6784840113643367767L;
 	
-	//@Value("#{applicationProperties['emptyBucketGenerator.temp.base.path']}")
-	//private String baseTempDirPath;
+	@Value("#{applicationProperties['emptyBucketGenerator.temp.base.path']}")
+	private String baseTempDirPath;
 	
 	private SpoutOutputCollector collector;
 	private TopologyContext      topologyContext;

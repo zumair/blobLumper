@@ -20,11 +20,13 @@ public class TempBucketGeneratorBolt extends BaseRichBolt{
 		
 	}
 	
+	/*
 	private boolean isBucketAlreadyExists(){
 		File baseTempDir = new File(baseTempDirPath);
 		File newEmptyDir = new File(baseTempDir, composedUniqueSubPath);
 		exists = newEmptyDir.exists();
 	}
+	*/
 
 	@Override
 	public void execute(Tuple input) {
