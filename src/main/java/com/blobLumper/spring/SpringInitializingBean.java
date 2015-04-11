@@ -15,7 +15,7 @@ public class SpringInitializingBean implements InitializingBean{
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		
-		dynamicApplicationPropertiesLoader.loadApplicationPropertiesFromDatabase();
+		//dynamicApplicationPropertiesLoader.loadApplicationPropertiesFromDatabase();
 		
 	}
 	

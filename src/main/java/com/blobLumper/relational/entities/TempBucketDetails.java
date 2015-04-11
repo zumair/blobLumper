@@ -11,6 +11,7 @@ import javax.persistence.TemporalType;
 @Table(name = "TempBucketDetails")
 @Entity
 public class TempBucketDetails extends AbstractEntity {
+	
 	private static final long serialVersionUID = 5112296850325611739L;
 	@Column(name = "mostSignificantBits", nullable = false)
 	Long mostSignificantBits;

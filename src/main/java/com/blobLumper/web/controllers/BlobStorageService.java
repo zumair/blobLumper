@@ -1,4 +1,4 @@
-package com.blobLumper.web.services;
+package com.blobLumper.web.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -8,6 +8,8 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
 		<persistence-unit name="zResearchRelationalPersistanceUnit" >
 				<description>persistence-unit</description>
 				<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+				<class>com.blobLumper.relational.entities.DynamicApplicationProperty</class>
+				<class>com.blobLumper.relational.entities.TempBucketDetails</class>
       			<exclude-unlisted-classes>true</exclude-unlisted-classes>
 				
    			<!-- A list of vendor-specific properties but it should be in hibernate.properties  -->

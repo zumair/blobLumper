@@ -1,5 +1,5 @@
 
-DROP DATABASE IF EXISTS blobLumper;
+--DROP DATABASE IF EXISTS blobLumper;
 CREATE DATABASE IF NOT EXISTS blobLumper;
 USE blobLumper;
 
