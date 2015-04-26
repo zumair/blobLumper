@@ -10,6 +10,8 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
 				<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 				<class>com.blobLumper.relational.entities.DynamicApplicationProperty</class>
 				<class>com.blobLumper.relational.entities.TempBucketDetails</class>
+				<class>com.blobLumper.relational.entities.BlobBasePath</class>
+				<class>com.blobLumper.relational.entities.Blob</class>
       			<exclude-unlisted-classes>true</exclude-unlisted-classes>
 				
    			<!-- A list of vendor-specific properties but it should be in hibernate.properties  -->

@@ -1,6 +1,6 @@
 package com.blobLumper.components;
 
-import com.blobLumper.relational.entities.Blob;
+import com.blobLumper.beans.SomeOtherBlobBean;
 
 public class CacheManager {
 
@@ -8,7 +8,7 @@ public class CacheManager {
 		
 	}
 	
-	public Blob getBlobFromCache(){
+	public SomeOtherBlobBean getBlobFromCache(){
 		
 		return null;
 	}

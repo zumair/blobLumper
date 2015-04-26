@@ -1,4 +1,4 @@
-package com.blobLumper.enums;
+package com.blobLumper.constants;
 
 import java.util.Map;
 

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.blobLumper.enums.DynamicApplicationProperties;
+import com.blobLumper.constants.DynamicApplicationProperties;
 import com.blobLumper.relational.entities.DynamicApplicationProperty;
 import com.blobLumper.repositories.jpa.DynamicApplicationPropertiesRepository;
 

@@ -25,13 +25,13 @@
  		
  		<sec:intercept-url pattern="/web-resources/**" 					access="permitAll()" />
  		<sec:intercept-url pattern="/userService/login" 			    		access="permitAll()" />
- 		<sec:intercept-url pattern="/**" access="hasRole('USER_ROLE')" />
+ 		<sec:intercept-url pattern="/**" 								access="permitAll()" />
  		
  		
   		
 		<sec:form-login 
 		    login-page="/userService/login" 
-		    default-target-url="/userService/home" 
+		    default-target-url="/index.jsp" 
 			authentication-failure-url="/userService/login?error=authenticationFailure" 
 			username-parameter="username"
 			password-parameter="password" 

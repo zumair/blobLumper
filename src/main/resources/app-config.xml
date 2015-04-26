@@ -37,6 +37,8 @@
 	
 	<context:property-placeholder ignore-unresolvable="true"
 		location="classpath:application.properties"/>
+	
+	<util:properties id="appProperties" location="classpath:application.properties" />
 		
 	<import resource="classpath:persistence-config.xml"/>
 	<import resource="classpath:web-config.xml"/>
