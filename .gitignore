@@ -1,0 +1,9 @@
+/target/
+/src/main/resources/application.properties
+/.classpath
+/.project
+/.metadata
+/.settings
+/RemoteSystemsTempFiles
+/Servers
+/target
