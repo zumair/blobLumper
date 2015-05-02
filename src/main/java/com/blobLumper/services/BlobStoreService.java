@@ -47,8 +47,21 @@ public class BlobStoreService {
 		 return basePathInstances.get(0);
 	}
 	
-	private void updateFolderCountForBasePath(final BlobBasePath blobBasePath){
-		blobBasePathRepository.updateBasePathFolderCount(blobBasePath.getId());
+	private synchronized void  updateFolderCountForBasePath(final BlobBasePath blobBasePath){
+		final BlobBasePath refreshedBlobBasePathInstance = blobBasePathRepository.findOne(blobBasePath.getId());
+		refreshedBlobBasePathInstance.setFolderCount(
+				refreshedBlobBasePathInstance.getFolderCount() == null 
+								? 0L 
+								: refreshedBlobBasePathInstance.getFolderCount()+ 1L);
+		blobBasePathRepository.saveAndFlush(refreshedBlobBasePathInstance);
+	}
+	
+	private String getValidatedSubPath(final String subPath, final String basePath){
+		final File file = new File(basePath+subPath);
+		if(file.exists()){
+			return subPath;
+		}
+		throw new RuntimeException("File does not exist against path="+basePath+subPath);
 	}
 	
 	private String storeFile(final byte[] file, final Long blobId, final String basePathString, final String fileName){
@@ -65,7 +78,8 @@ public class BlobStoreService {
 				if(fileFolderCreated){
 					final File actualFile = new File(fileFolder,fileName);
 					FileUtils.writeByteArrayToFile(actualFile, file);
-					return "/"+String.valueOf(blobId)+"/"+fileName;
+					final String subPathString = "/"+String.valueOf(blobId)+"/"+fileName;
+					return getValidatedSubPath(subPathString, basePathString);
 				}
 				
 			}catch(final Exception e){
