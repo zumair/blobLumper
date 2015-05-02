@@ -1,8 +1,11 @@
 package com.blobLumper.services;
 
 import java.io.File;
+import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +32,7 @@ public class BlobStoreService {
 	private Blob createBasicBlobEntry(final BlobBasePath blobBasePath){
 		final Blob newBlobInstance = new Blob();
 		newBlobInstance.setBasePathId(blobBasePath.getId());
-		blobRepository.save(newBlobInstance);
-		return null;
+		return blobRepository.save(newBlobInstance);
 	}
 	
 	
@@ -41,22 +43,35 @@ public class BlobStoreService {
 	 */
 	private BlobBasePath findSuitableBasePathInstance(){
 		
-		return null;
+		 final List<BlobBasePath> basePathInstances = blobBasePathRepository.findBasePathWithLeastFolderCount();
+		 return basePathInstances.get(0);
 	}
 	
 	private void updateFolderCountForBasePath(final BlobBasePath blobBasePath){
-		
-		blobBasePath.setFolderCount(blobBasePath.getFolderCount() + 1);
-		blobBasePathRepository.save(blobBasePath);
+		blobBasePathRepository.updateBasePathFolderCount(blobBasePath.getId());
 	}
 	
-	private String storeFile(final byte[] file, final Long blobId, final String basePath){
+	private String storeFile(final byte[] file, final Long blobId, final String basePathString, final String fileName){
+		final File basePath   = new File(basePathString);
+		final File fileFolder = new File(basePath, String.valueOf(blobId));
 		
 		//1) Create folder with id as a name under base path folder
-		
 		//2) Store bytes/file in that folder you have just created
-		
 		//3) Return sub file path you have just created for a file e.g: /111/abc.jpg
+		
+		if(!fileFolder.exists()){
+			try{
+				final boolean fileFolderCreated = fileFolder.mkdir();
+				if(fileFolderCreated){
+					final File actualFile = new File(fileFolder,fileName);
+					FileUtils.writeByteArrayToFile(actualFile, file);
+					return "/"+String.valueOf(blobId)+"/"+fileName;
+				}
+				
+			}catch(final Exception e){
+				throw new RuntimeException(e);
+			}
+		}
 		
 		return null;
 	}
@@ -79,14 +94,14 @@ public class BlobStoreService {
 	
 	private String getFileExtensionOfFile(final String fullFileName){
 		
-		return null;
+		return FilenameUtils.getExtension(fullFileName);
 	}
 	
 	public BlobStorageResponse storeBlob(final byte[] file, final String fullFileName){
 		
 		final BlobBasePath basePath = findSuitableBasePathInstance();
 		final Blob basicBlob = createBasicBlobEntry(basePath);
-		final String subFilePath = storeFile(file, basicBlob.getId(), basePath.getBasePath());
+		final String subFilePath = storeFile(file, basicBlob.getId(), basePath.getBasePath(),fullFileName);
 		final String fileExtension = getFileExtensionOfFile(fullFileName);
 		updateBlobEntry( subFilePath, basicBlob, fullFileName, fileExtension);
 		updateFolderCountForBasePath(basePath);
