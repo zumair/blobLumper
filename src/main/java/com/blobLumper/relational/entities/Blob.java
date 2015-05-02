@@ -68,7 +68,11 @@ public class Blob extends AbstractEntity {
 		this.blobBasePath = blobBasePath;
 	}
 	
-	
+	public String getFullPath(){
+		final String basePath = this.blobBasePath.getBasePath();
+		return basePath+this.getSubPath();
+		
+	}
 	
 	
 }
