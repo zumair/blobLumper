@@ -29,7 +29,7 @@
 	   http://www.springframework.org/schema/util 
 	   http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven  />
 	<!-- In order to allow mapping for /html -->
 	<mvc:default-servlet-handler />
 
@@ -86,5 +86,6 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		
 	</bean>
-
+	
+	
 </beans>						

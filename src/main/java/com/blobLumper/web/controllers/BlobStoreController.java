@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.blobLumper.beans.BlobStorageResponse;
+import com.blobLumper.relational.entities.Blob;
+import com.blobLumper.repositories.jpa.BlobRepository;
 import com.blobLumper.services.BlobStoreService;
 
 @Controller
@@ -21,6 +23,9 @@ public class BlobStoreController {
 	
 	@Autowired
 	private BlobStoreService blobStoreService;
+	
+	@Autowired
+	private BlobRepository blobRepository;
 	
 	@RequestMapping(value="/storeBlob", method=RequestMethod.POST)
 	public @ResponseBody BlobStorageResponse storeBlob(
@@ -31,8 +36,14 @@ public class BlobStoreController {
 		
 		final String fullFileName = multipartFile.getOriginalFilename();
 		final byte[] fileBytes = multipartFile.getBytes();
-		return blobStoreService.storeBlob(fileBytes, fullFileName);
-		
+		final String contentType = multipartFile.getContentType();
+		final Long blobId = blobStoreService.storeBlob(fileBytes, fullFileName,contentType);
+		final Blob blob = blobRepository.findOne(blobId);
+		final BlobStorageResponse blobStorageResponse = new BlobStorageResponse();
+		blobStorageResponse.setHost(blob.getBlobBasePath().getHost());
+		blobStorageResponse.setBlobId(blob.getId());
+		blobStorageResponse.setBrowsingPath(blob.getBrowsingPath());
+		return blobStorageResponse;
 	}
 	
 	

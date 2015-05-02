@@ -27,6 +27,17 @@ public class Blob extends AbstractEntity {
 	
 	@Column(name = "fileExtension")
 	private String extension;
+	
+	@Column(name="contentType")
+	private String contentType;
+	
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(final String contentType) {
+		this.contentType = contentType;
+	}
 
 	public Long getBasePathId() {
 		return basePathId;
@@ -73,6 +84,11 @@ public class Blob extends AbstractEntity {
 		return basePath+this.getSubPath();
 		
 	}
+	
+	public String getBrowsingPath(){
+		return this.blobBasePath.getHost()+"/files/"+this.getId();
+	}
+	
 	
 	
 }

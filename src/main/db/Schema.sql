@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS BlobObject(
     subFilePath varchar(500),
     fileName    varchar(255),
     fileExtension varchar(10),
+    contentType  varchar(100),
     
     PRIMARY KEY (id),
     CONSTRAINT fk_bBPId FOREIGN KEY (basePathId) REFERENCES BlobBasePath (id),

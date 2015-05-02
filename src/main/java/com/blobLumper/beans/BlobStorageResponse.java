@@ -6,7 +6,7 @@ public class BlobStorageResponse {
 	
 	private String host;
 	private Long blobId;
-	
+	private String browsingPath;
 	
 	
 	public Long getBlobId() {
@@ -21,8 +21,12 @@ public class BlobStorageResponse {
 	public void setHost(final String host) {
 		this.host = host;
 	}
-	
-	
+	public String getBrowsingPath() {
+		return browsingPath;
+	}
+	public void setBrowsingPath(final String browsingPath) {
+		this.browsingPath = browsingPath;
+	}
 	
 	
 }

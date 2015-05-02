@@ -10,17 +10,17 @@ ON DUPLICATE KEY UPDATE name = name;
 
 
 INSERT INTO BlobBasePath(host,basePath,active)
-VALUES ('localhost','/Users/zohaibumairMacMini/Documents/temp1',true )
+VALUES ('localhost:8081/ROOT','/Users/zohaibumairMacMini/Documents/temp1',true )
 ON DUPLICATE KEY UPDATE host = host;
 
 
 INSERT INTO BlobBasePath(host,basePath,active)
-VALUES ('localhost','/Users/zohaibumairMacMini/Documents/temp2',true )
+VALUES ('localhost:8081/ROOT','/Users/zohaibumairMacMini/Documents/temp2',true )
 ON DUPLICATE KEY UPDATE host = host;
 
 
 INSERT INTO BlobBasePath(host,basePath,active)
-VALUES ('localhost','/Users/zohaibumairMacMini/Documents/temp3',true )
+VALUES ('localhost:8081/ROOT','/Users/zohaibumairMacMini/Documents/temp3',true )
 ON DUPLICATE KEY UPDATE host = host;
 
 commit;
