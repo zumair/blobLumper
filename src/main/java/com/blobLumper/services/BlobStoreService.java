@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.blobLumper.constants.DynamicApplicationProperties;
 import com.blobLumper.relational.entities.Blob;
 import com.blobLumper.relational.entities.BlobBasePath;
 import com.blobLumper.repositories.jpa.BlobBasePathRepository;
@@ -25,6 +26,16 @@ public class BlobStoreService {
 	@Autowired
 	private BlobRepository blobRepository;
 
+	
+	public boolean isValidFileSize(final long fileSize){
+		final String maxFileSizeString 	= DynamicApplicationProperties.MAX_FILE_SIZE.getValue();
+		final long   maxFileSize			= Long.parseLong(maxFileSizeString);
+		if(maxFileSize >= fileSize){
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Create a blob record with id and basePath id Only
 	 * 
@@ -124,6 +135,31 @@ public class BlobStoreService {
 		return FilenameUtils.getExtension(fullFileName);
 	}
 
+	public boolean deleteFileAgainstBlobEntryIfExists(final Blob blob){
+		final String blobPath = blob.getFullPath();
+		final File   file     = new File(blob.getFullPath());
+		if(file.exists() && file.isFile()){
+			return file.delete();
+		}
+		return false;
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRES_NEW, rollbackFor=Throwable.class)
+	public Long replaceBlob(final byte[] file,
+			final String fullFileName, final String contentType, final Long blobId) {
+
+		final Blob blob = blobRepository.findOne(blobId);
+		deleteFileAgainstBlobEntryIfExists(blob);
+		final String subFilePath =storeFile(file, blobId, blob.getBlobBasePath().getBasePath() , fullFileName);
+		final String fileExtension = getFileExtension(fullFileName);
+		blob.setContentType(contentType);
+		blob.setExtension(fileExtension);
+		blob.setSubPath(subFilePath);
+		blob.setFileName(fullFileName);
+		blobRepository.save(blob);
+		
+		return blobId;
+	}
 
 	@Transactional(propagation=Propagation.REQUIRES_NEW, rollbackFor=Throwable.class)
 	public Long storeBlob(final byte[] file,

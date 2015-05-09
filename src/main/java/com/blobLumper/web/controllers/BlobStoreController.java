@@ -27,6 +27,8 @@ public class BlobStoreController {
 	@Autowired
 	private BlobRepository blobRepository;
 	
+	
+	
 	@RequestMapping(value="/storeBlob", method=RequestMethod.POST)
 	public @ResponseBody BlobStorageResponse storeBlob(
 			@RequestParam("fileForUpload") final MultipartFile multipartFile,
@@ -38,12 +40,31 @@ public class BlobStoreController {
 		final byte[] fileBytes = multipartFile.getBytes();
 		final String contentType = multipartFile.getContentType();
 		final Long blobId = blobStoreService.storeBlob(fileBytes, fullFileName,contentType);
+		return createSuccessfullStorageResponse(blobId);
+	}
+
+	private BlobStorageResponse createSuccessfullStorageResponse(
+			final Long blobId) {
 		final Blob blob = blobRepository.findOne(blobId);
 		final BlobStorageResponse blobStorageResponse = new BlobStorageResponse();
 		blobStorageResponse.setHost(blob.getBlobBasePath().getHost());
 		blobStorageResponse.setBlobId(blob.getId());
 		blobStorageResponse.setBrowsingPath(blob.getBrowsingPath());
 		return blobStorageResponse;
+	}
+	
+	@RequestMapping(value="/overwriteBlob", method=RequestMethod.POST)
+	public @ResponseBody BlobStorageResponse overwriteBlob(
+			@RequestParam("fileForUpload") 	final MultipartFile multipartFile,
+			@RequestParam("blobId")			final Long blobId,
+			final HttpServletRequest request) throws IOException
+	{
+		final String fullFileName = multipartFile.getOriginalFilename();
+		final byte[] fileBytes = multipartFile.getBytes();
+		final String contentType = multipartFile.getContentType();
+		blobStoreService.replaceBlob(fileBytes, fullFileName, contentType, blobId);
+		return createSuccessfullStorageResponse(blobId);
+		
 	}
 	
 	

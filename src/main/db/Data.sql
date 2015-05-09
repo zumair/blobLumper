@@ -8,6 +8,10 @@ VALUES ('emptyBucket.temp.base.path','/Users/zohaibumairMacMini/Documents/temp',
 'Base directory for temporary buckets' )
 ON DUPLICATE KEY UPDATE name = name;
 
+INSERT INTO DynamicApplicationProperties(name,value,description)
+VALUES ('maxFileSizeInBytesToStore','1000000',
+'Max file size to store (in bytes)' )
+ON DUPLICATE KEY UPDATE name = name;
 
 INSERT INTO BlobBasePath(host,basePath,active)
 VALUES ('localhost:8081/ROOT','/Users/zohaibumairMacMini/Documents/temp1',true )

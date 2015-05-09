@@ -7,7 +7,7 @@ public class BlobStorageResponse {
 	private String host;
 	private Long blobId;
 	private String browsingPath;
-	
+	private String error;
 	
 	public Long getBlobId() {
 		return blobId;
@@ -27,6 +27,17 @@ public class BlobStorageResponse {
 	public void setBrowsingPath(final String browsingPath) {
 		this.browsingPath = browsingPath;
 	}
+	
+	public static BlobStorageResponse error(final String message){
+		final BlobStorageResponse blobStorageResponse = new BlobStorageResponse();
+		blobStorageResponse.error = message;
+		return blobStorageResponse;
+	}
+	
+	public String getError(){
+		return error;
+	}
+	
 	
 	
 }
