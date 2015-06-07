@@ -69,6 +69,7 @@ public class BlobStoreService {
 		refreshedBlobBasePathInstance
 				.setFolderCount(refreshedBlobBasePathInstance.getFolderCount() == null ? 0L
 						: refreshedBlobBasePathInstance.getFolderCount() + 1L);
+		
 		blobBasePathRepository.save(refreshedBlobBasePathInstance);
 	}
 
