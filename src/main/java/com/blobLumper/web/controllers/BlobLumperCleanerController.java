@@ -74,7 +74,7 @@ public class BlobLumperCleanerController {
 		// 6 find blob record against folder name which will be find by blob ID
 		// 7 if we could not find record then delete a folder
 
-		
+/*		
 		List<BlobBasePath> blobBasePaths = blobBasePathRepository.findAll();
 
 		for (BlobBasePath blobBasePath : blobBasePaths) 
@@ -96,7 +96,7 @@ public class BlobLumperCleanerController {
 			if(blobId!=blobBasePath.getId().toString())
 				
 			{
-				String[]entries = blobBasePaths.add				
+				//String[]entries = blobBasePaths.add				
 				for(String s: entries){
 				    File currentFile = new File(index.getPath(),s);
 				    currentFile.delete();
@@ -105,6 +105,7 @@ public class BlobLumperCleanerController {
 			
 			}    
 		}
+		*/
 	}
 
 	// find all entries in blob base path

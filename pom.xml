@@ -41,8 +41,8 @@
 	<properties>
 		<!-- For maven plug-in -->
 		<war.bundle>true</war.bundle>
-		<org.springframework-version>4.0.5.RELEASE</org.springframework-version>
-		<org.springData-version>1.5.2.RELEASE</org.springData-version>
+		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
+		<org.springData-version>1.7.2.RELEASE</org.springData-version>
 		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<querydsl.version>2.3.2</querydsl.version>
@@ -50,6 +50,7 @@
 		<h2.database.version>1.4.180</h2.database.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		<hibernate-validator.version>5.1.1.Final</hibernate-validator.version>
+	<jackson.version>2.5.3</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -99,15 +100,10 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>1.7.3</version>
+			<version>1.8.4</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.0.RELEASE</version>
-		</dependency>
-
+					
+		
 
 		<!-- Spring Security -->
 		<dependency>
@@ -127,6 +123,23 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${spring.security.version}</version>
+		</dependency>
+<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 
 
@@ -163,7 +176,7 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.1</version>
+			<version>3.2.1</version>
 		</dependency>
 
 		<dependency>
@@ -176,7 +189,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.3</version>
+			<version>1.9.2</version>
 		</dependency>
 
 		<dependency>
@@ -210,11 +223,7 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.3</version>
-		</dependency>
+		
 
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -282,7 +291,11 @@
 			<version>${h2.database.version}</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.4</version>
+		</dependency>
 		<dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
@@ -301,10 +314,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.2</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -315,22 +328,23 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-
-			<plugin>
+<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.5</version>
+				<version>1.7</version>
 				<!-- new configuration is here -->
 				<configuration>
-					<complianceLevel>1.6</complianceLevel>
-					<source>1.6</source>
-					<target>1.6</target>
+					<complianceLevel>1.8</complianceLevel>
+					<source>1.8</source>
+					<target>1.8</target>
+					<Xlint>ignore</Xlint>
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>org.springframework</groupId>
 							<artifactId>spring-aspects</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
+
 				</configuration>
 				<executions>
 					<execution>
@@ -340,7 +354,25 @@
 						</goals>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjrt</artifactId>
+						<version>1.8.4</version>
+					</dependency>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>1.8.4</version>
+					</dependency>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>1.8.4</version>
+					</dependency>
+				</dependencies>
 			</plugin>
+
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
